@@ -10,11 +10,11 @@ exports.config = {
   /**
    * Array of application names.
    */
-  app_name: ['nestjs-dev'],
+  app_name: ['xxxxxxxxxxxxx'],
   /**
    * Your New Relic license key.
    */
-  license_key: '4622339851072c1cbde840734209becaFFFFNRAL',
+  license_key: 'xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx',
   /**
    * This setting controls distributed tracing.
    */

@@ -1,14 +1,19 @@
 // src/main.ts
-import 'newrelic';
+// This must be the first line of code
+require('newrelic');
+
 import { NestFactory } from '@nestjs/core';
 import { AppModule } from './app.module';
-import { NewRelicLogger } from './newrelic-logger.service';
+import { Logger } from '@nestjs/common';
 
 async function bootstrap() {
+  const logger = new Logger('Bootstrap');
   const app = await NestFactory.create(AppModule);
-  // Use custom logger that sends logs to New Relic
-  app.useLogger(new NewRelicLogger());
+  
+  logger.log('Application starting up');
   await app.listen(3000);
-  console.log(`Application is running on: http://localhost:3000`);
+  logger.log('Application listening on port 3000');
 }
-bootstrap();
+bootstrap().catch(err => {
+  console.error('Error starting application:', err);
+});

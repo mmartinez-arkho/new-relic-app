@@ -1,0 +1,71 @@
+{
+    "info": {
+      "name": "NestJS New Relic Demo",
+      "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+    },
+    "item": [
+      {
+        "name": "Get All Items",
+        "request": {
+          "method": "GET",
+          "url": {
+            "raw": "http://localhost:3000/items",
+            "protocol": "http",
+            "host": ["localhost"],
+            "port": "3000",
+            "path": ["items"]
+          }
+        }
+      },
+      {
+        "name": "Get Item By ID",
+        "request": {
+          "method": "GET",
+          "url": {
+            "raw": "http://localhost:3000/items/1",
+            "protocol": "http",
+            "host": ["localhost"],
+            "port": "3000",
+            "path": ["items", "1"]
+          }
+        }
+      },
+      {
+        "name": "Create Item",
+        "request": {
+          "method": "POST",
+          "header": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "url": {
+            "raw": "http://localhost:3000/items",
+            "protocol": "http",
+            "host": ["localhost"],
+            "port": "3000",
+            "path": ["items"]
+          },
+          "body": {
+            "mode": "raw",
+            "raw": "{\n  \"name\": \"Sample Item\",\n  \"description\": \"This is a sample item for testing\"\n}"
+          }
+        }
+      },
+      {
+        "name": "Generate Test Error",
+        "request": {
+          "method": "GET",
+          "url": {
+            "raw": "http://localhost:3000/items/test/error",
+            "protocol": "http",
+            "host": ["localhost"],
+            "port": "3000",
+            "path": ["items", "test", "error"]
+          }
+        }
+      }
+    ]
+  }
+  

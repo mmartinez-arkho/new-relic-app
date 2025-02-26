@@ -1,99 +1,221 @@
-<p align="center">
-  <a href="http://nestjs.com/" target="blank"><img src="https://nestjs.com/img/logo-small.svg" width="120" alt="Nest Logo" /></a>
-</p>
+# NestJS New Relic Integration
 
-[circleci-image]: https://img.shields.io/circleci/build/github/nestjs/nest/master?token=abc123def456
-[circleci-url]: https://circleci.com/gh/nestjs/nest
+A demonstration project showcasing comprehensive integration between NestJS and New Relic APM, with a focus on complete monitoring, logging, and error tracking capabilities.
 
-  <p align="center">A progressive <a href="http://nodejs.org" target="_blank">Node.js</a> framework for building efficient and scalable server-side applications.</p>
-    <p align="center">
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/v/@nestjs/core.svg" alt="NPM Version" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/l/@nestjs/core.svg" alt="Package License" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/dm/@nestjs/common.svg" alt="NPM Downloads" /></a>
-<a href="https://circleci.com/gh/nestjs/nest" target="_blank"><img src="https://img.shields.io/circleci/build/github/nestjs/nest/master" alt="CircleCI" /></a>
-<a href="https://coveralls.io/github/nestjs/nest?branch=master" target="_blank"><img src="https://coveralls.io/repos/github/nestjs/nest/badge.svg?branch=master#9" alt="Coverage" /></a>
-<a href="https://discord.gg/G7Qnnhy" target="_blank"><img src="https://img.shields.io/badge/discord-online-brightgreen.svg" alt="Discord"/></a>
-<a href="https://opencollective.com/nest#backer" target="_blank"><img src="https://opencollective.com/nest/backers/badge.svg" alt="Backers on Open Collective" /></a>
-<a href="https://opencollective.com/nest#sponsor" target="_blank"><img src="https://opencollective.com/nest/sponsors/badge.svg" alt="Sponsors on Open Collective" /></a>
-  <a href="https://paypal.me/kamilmysliwiec" target="_blank"><img src="https://img.shields.io/badge/Donate-PayPal-ff3f59.svg" alt="Donate us"/></a>
-    <a href="https://opencollective.com/nest#sponsor"  target="_blank"><img src="https://img.shields.io/badge/Support%20us-Open%20Collective-41B883.svg" alt="Support us"></a>
-  <a href="https://twitter.com/nestframework" target="_blank"><img src="https://img.shields.io/twitter/follow/nestframework.svg?style=social&label=Follow" alt="Follow us on Twitter"></a>
-</p>
-  <!--[![Backers on Open Collective](https://opencollective.com/nest/backers/badge.svg)](https://opencollective.com/nest#backer)
-  [![Sponsors on Open Collective](https://opencollective.com/nest/sponsors/badge.svg)](https://opencollective.com/nest#sponsor)-->
+## 📋 Overview
 
-## Description
+This project demonstrates best practices for integrating New Relic monitoring with a NestJS application. It includes:
 
-[Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
+- Custom logging service with New Relic integration
+- Request tracking middleware
+- Transaction and segment instrumentation
+- Error monitoring and reporting
+- Complete API with GET and POST endpoints for testing
 
-## Project setup
+By following this example, you can ensure your NestJS applications have comprehensive observability through New Relic's APM platform.
 
-```bash
-$ npm install
+## ✨ Features
+
+- **Custom Logger Integration**: Sends all application logs to New Relic
+- **HTTP Request Tracking**: Measures and records all API calls
+- **Error Monitoring**: Captures and reports detailed error information
+- **Performance Metrics**: Records custom metrics for application performance
+- **Transaction Tracing**: Provides detailed traces of application execution
+- **RESTful API**: Simple item management API for demonstration
+
+## 🔧 Prerequisites
+
+- Node.js (v14 or higher)
+- npm or yarn
+- A New Relic account and license key
+- Postman (for testing the API)
+
+## 🚀 Installation
+
+1. Clone the repository:
+   ```bash
+   git clone https://github.com/yourusername/nestjs-newrelic-demo.git
+   cd nestjs-newrelic-demo
+   ```
+
+2. Install dependencies:
+   ```bash
+   npm install
+   ```
+
+3. Configure New Relic:
+   - Open the `newrelic.js` file in the root directory
+   - Replace `'your_license_key_here'` with your actual New Relic license key
+   - Update the `app_name` if desired
+
+## ⚙️ Configuration
+
+### New Relic Configuration
+
+You have to create `newrelic.js` on root using the `newrelic_example.js` file that contains the New Relic agent configuration:
+
+```javascript
+exports.config = {
+  app_name: ['NestJS New Relic Demo'],  // Set your application name
+  license_key: 'your_license_key_here', // Replace with your actual license key
+  distributed_tracing: {
+    enabled: true                       // Enable distributed tracing
+  },
+  logging: {
+    level: 'info'                      // Logging level (use 'trace' for debugging)
+  }
+  // Other configuration options...
+}
 ```
 
-## Compile and run the project
+## 🏃‍♂️ Running the Application
+
+Start the application in development mode:
 
 ```bash
-# development
-$ npm run start
-
-# watch mode
-$ npm run start:dev
-
-# production mode
-$ npm run start:prod
+npm run start:dev
 ```
 
-## Run tests
+The application will be available at `http://localhost:3000`.
 
-```bash
-# unit tests
-$ npm run test
+## 🧪 Testing with Postman
 
-# e2e tests
-$ npm run test:e2e
+A Postman collection is provided to test the API endpoints. Import the collection from the `postman` directory or use the following endpoints:
 
-# test coverage
-$ npm run test:cov
+### 1. Get All Items
+- **Method**: GET
+- **URL**: `http://localhost:3000/items`
+
+### 2. Get Item by ID
+- **Method**: GET
+- **URL**: `http://localhost:3000/items/1`
+
+### 3. Create Item
+- **Method**: POST
+- **URL**: `http://localhost:3000/items`
+- **Body**: 
+  ```json
+  {
+    "name": "Sample Item",
+    "description": "This is a sample item for testing"
+  }
+  ```
+
+### 4. Generate Test Error
+- **Method**: GET
+- **URL**: `http://localhost:3000/items/test/error`
+
+## 📁 Project Structure
+
+```
+nestjs-newrelic-demo/
+├── src/
+│   ├── app.controller.ts          # Default application controller
+│   ├── app.module.ts              # Main application module
+│   ├── app.service.ts             # Default application service
+│   ├── main.ts                    # Application entry point with New Relic initialization
+│   ├── items/                     # Feature module for item management
+│   │   └── items.controller.ts    # Controller with GET/POST endpoints and error test
+│   ├── logger/                    # Custom logging module
+│   │   ├── logger.module.ts       # Module configuration for logger
+│   │   └── logger.service.ts      # Service that integrates with New Relic logging
+│   ├── middleware/
+│   │   └── newrelic.middleware.ts # Middleware that tracks HTTP requests
+├── newrelic.js                    # New Relic configuration file
+├── package.json                   # Project dependencies and scripts
+└── README.md                      # Project documentation
 ```
 
-## Deployment
+## 📊 Viewing Data in New Relic
 
-When you're ready to deploy your NestJS application to production, there are some key steps you can take to ensure it runs as efficiently as possible. Check out the [deployment documentation](https://docs.nestjs.com/deployment) for more information.
+After running your application and making some requests, you can view the data in the New Relic UI:
 
-If you are looking for a cloud-based platform to deploy your NestJS application, check out [Mau](https://mau.nestjs.com), our official platform for deploying NestJS applications on AWS. Mau makes deployment straightforward and fast, requiring just a few simple steps:
+1. Log in to your New Relic account
+2. Navigate to APM > Applications
+3. Select your application (named as specified in `newrelic.js`)
 
-```bash
-$ npm install -g mau
-$ mau deploy
+You'll be able to see:
+- Application performance metrics
+- Transaction traces
+- Error reports
+- Logs from your application
+- Custom metrics and attributes
+
+## ⚠️ Troubleshooting
+
+### Logs Not Appearing in New Relic
+- Verify your license key is correct
+- Check that `require('newrelic')` is the first line in `main.ts`
+- Ensure your application can connect to New Relic's servers
+
+### Missing Transaction Data
+- Verify that segments and transactions are properly created and ended
+- Check for any errors in the New Relic agent logs
+
+### Error Monitoring Issues
+- Ensure errors are properly caught and reported using `noticeError()`
+- Verify error objects have the required properties
+
+## 🔍 How It Works
+
+### 1. New Relic Initialization
+New Relic is initialized first in `main.ts`:
+```typescript
+// This must be the first line of code
+require('newrelic');
+
+// Rest of the application bootstrap
 ```
 
-With Mau, you can deploy your application in just a few clicks, allowing you to focus on building features rather than managing infrastructure.
+### 2. Custom Logger
+The `LoggerService` integrates with New Relic's logging system:
+```typescript
+// Send log to New Relic
+newrelic.recordLogEvent({
+  message: messageWithContext,
+  level: 'info',
+  timestamp: Date.now(),
+});
+```
 
-## Resources
+### 3. Request Tracking
+The `NewRelicMiddleware` tracks all HTTP requests:
+```typescript
+// Add custom attributes to New Relic
+newrelic.addCustomAttributes({
+  requestMethod: req.method,
+  requestPath: req.path,
+  responseStatus: res.statusCode,
+  responseTime: duration,
+});
+```
 
-Check out a few resources that may come in handy when working with NestJS:
+### 4. Transaction and Segment Tracking
+Controller methods use New Relic's transaction tracking:
+```typescript
+// Track a specific segment of code
+return newrelic.startSegment('getAllItems', true, () => {
+  // Code to measure...
+});
+```
 
-- Visit the [NestJS Documentation](https://docs.nestjs.com) to learn more about the framework.
-- For questions and support, please visit our [Discord channel](https://discord.gg/G7Qnnhy).
-- To dive deeper and get more hands-on experience, check out our official video [courses](https://courses.nestjs.com/).
-- Deploy your application to AWS with the help of [NestJS Mau](https://mau.nestjs.com) in just a few clicks.
-- Visualize your application graph and interact with the NestJS application in real-time using [NestJS Devtools](https://devtools.nestjs.com).
-- Need help with your project (part-time to full-time)? Check out our official [enterprise support](https://enterprise.nestjs.com).
-- To stay in the loop and get updates, follow us on [X](https://x.com/nestframework) and [LinkedIn](https://linkedin.com/company/nestjs).
-- Looking for a job, or have a job to offer? Check out our official [Jobs board](https://jobs.nestjs.com).
+## 🧩 Extending the Project
 
-## Support
+Ideas for extending this project:
+- Add more endpoints and features
+- Implement custom dashboards in New Relic
+- Add database monitoring
+- Set up alerting based on error rates or response times
+- Implement distributed tracing across multiple services
 
-Nest is an MIT-licensed open source project. It can grow thanks to the sponsors and support by the amazing backers. If you'd like to join them, please [read more here](https://docs.nestjs.com/support).
+## 📄 License
 
-## Stay in touch
+This project is licensed under the MIT License - see the LICENSE file for details.
 
-- Author - [Kamil Myśliwiec](https://twitter.com/kammysliwiec)
-- Website - [https://nestjs.com](https://nestjs.com/)
-- Twitter - [@nestframework](https://twitter.com/nestframework)
+---
 
-## License
+## 🙋‍♂️ Support
 
-Nest is [MIT licensed](https://github.com/nestjs/nest/blob/master/LICENSE).
+If you have any questions or need help with this project, please open an issue in the GitHub repository or contact the maintainers directly.
+
+Happy monitoring! 📈
