@@ -80,7 +80,7 @@ The application will be available at `http://localhost:3000`.
 
 ## 🧪 Testing with Postman
 
-A Postman collection is provided to test the API endpoints. Import the collection from the `postman` directory or use the following endpoints:
+A Postman collection "nestjs-collection.json" is provided to test the API endpoints. Import the collection from the `postman` directory or use the following endpoints:
 
 ### 1. Get All Items
 - **Method**: GET
